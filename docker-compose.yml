@@ -1,14 +1,14 @@
 version: '2.1'
 
 services:
-  nodejs-template:
-    image: nodejs-template
+  user-management:
+    image: user-management
     build: .
     environment:
       NODE_ENV: development
     ports:
       - 3000:3000
-    # volumes:
-    #   - ./src:/usr/src/app/src
-    #   - ./server.js:/usr/src/app/server.js
+    volumes:
+      - ./src:/usr/src/app/src
+      - ./server.ts:/usr/src/app/server.ts
     command: npm run dev
