@@ -1,0 +1,33 @@
+{
+  "name": "nodejs-template",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "jest",
+    "dev": "nodemon server.js",
+    "start":"node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vinaymavi/nodejs-template.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vinaymavi/nodejs-template/issues"
+  },
+  "homepage": "https://github.com/vinaymavi/nodejs-template#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "firebase-admin": "^8.9.2",
+    "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "husky": "^4.2.3",
+    "jest": "^25.1.0",
+    "nodemon": "^2.0.2"
+  }
+}
