@@ -17,6 +17,12 @@ stages:
           displayName: "Installing Dependencies"
         - script: npm run test:cov
           displayName: "Unit Test"
+        - task: PublishTestResults@2
+          inputs:
+            testResultsFormat: 'JUnit'
+            testResultsFiles: '**/coverage*.xml'
+            failTaskOnFailedTests: true
+            testRunTitle: 'Jest Test'
         - script: npm run build:webpack
           displayName: "Building Package"
         - task: ArchiveFiles@2
