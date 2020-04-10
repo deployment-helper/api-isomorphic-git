@@ -20,7 +20,7 @@ stages:
         - task: PublishTestResults@2
           inputs:
             testResultsFormat: 'JUnit'
-            testResultsFiles: '**/coverage*.xml'
+            testResultsFiles: '**/test-*.xml'
             failTaskOnFailedTests: true
             testRunTitle: 'Jest Test'
         - script: npm run build:webpack
