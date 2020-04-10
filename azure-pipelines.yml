@@ -48,7 +48,7 @@ stages:
             downloadPath: '$(System.ArtifactsDirectory)'
         - task: ExtractFiles@1
           inputs:
-            archiveFilePatterns: '**/$(Build.BuildId).zip'
+            archiveFilePatterns: '$(System.ArtifactsDirectory)/build/$(Build.BuildId).zip'
             destinationFolder: '$(System.ArtifactsDirectory)'
             cleanDestinationFolder: true
         - task: DownloadSecureFile@1
