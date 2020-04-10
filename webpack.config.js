@@ -22,6 +22,7 @@ module.exports = {
    plugins: [
     new CopyPlugin([
       { from: './app.yaml', to: './app.yaml' },
+      { from: './app.js', to: './app.js' },
       { from: './package.json', to: './package.json' },
     ]),
   ],
