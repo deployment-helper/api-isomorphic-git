@@ -49,7 +49,7 @@ stages:
         - task: ExtractFiles@1
           inputs:
             archiveFilePatterns: '$(System.ArtifactsDirectory)/build/$(Build.BuildId).zip'
-            destinationFolder: '$(System.ArtifactsDirectory)'
+            destinationFolder: '$(System.ArtifactsDirectory)/dist'
             cleanDestinationFolder: true
         - task: DownloadSecureFile@1
           displayName: "Download GCP Key"
