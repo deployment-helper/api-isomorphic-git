@@ -1,0 +1,24 @@
+name: "User Management"
+trigger: 
+  - master
+  - develop
+stages:
+  - stage: "Build"
+    displayName: "Build Code"
+    jobs:
+      - job: "npm_nstall"
+        displayName: "Install Dependencies"
+        steps:
+        - task: NodeTool@0
+          displayName: "Setup Node.Js Environment"
+          inputs:
+            versionSpec: 'v12.16.1'
+        - script: npm install
+          displayName: "Installing Dependencies"
+        - script: npm run build:webpack
+          displayName: "Building Package"
+        - task: PublishBuildArtifacts@1
+          inputs:
+            PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+            ArtifactName: 'build'
+            publishLocation: 'Container'
