@@ -46,6 +46,11 @@ stages:
             downloadType: 'single'
             artifactName: 'build'
             downloadPath: '$(System.ArtifactsDirectory)'
+        - task: ExtractFiles@1
+          inputs:
+            archiveFilePatterns: '**/$(Build.BuildId).zip'
+            destinationFolder: '$(System.ArtifactsDirectory)'
+            cleanDestinationFolder: true
         - task: DownloadSecureFile@1
           displayName: "Download GCP Key"
           name: "AuthKey"
