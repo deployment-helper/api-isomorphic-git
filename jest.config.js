@@ -1,4 +1,5 @@
 module.exports = {
+  testResultsProcessor: "./node_modules/jest-junit-reporter",
     collectCoverageFrom: [
         "**/*.{js,ts}",
         "!**/*.config.{js,ts}",
