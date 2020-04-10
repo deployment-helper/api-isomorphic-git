@@ -1,6 +1,10 @@
+# Auto generated file
 runtime: nodejs12
 instance_class: F1
 automatic_scaling: 
     min_instances: 1
     max_instances: 1
     max_concurrent_requests: 50
+env_variables:
+    DATABASE_NAME: dev-quiz-platform
+
