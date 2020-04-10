@@ -68,5 +68,5 @@ stages:
             gcloud config set project $(GCP_PROJECT_NAME)
           displayName: 'Activate Service Account'
         - script: 
-            gcloud app deploy '$(System.ArtifactsDirectory)/dist/dist'
+            yes | gcloud app deploy '$(System.ArtifactsDirectory)/dist/dist'
           displayName: "Deploy to AppEngine"
