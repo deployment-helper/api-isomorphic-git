@@ -21,7 +21,7 @@ stages:
           displayName: "LS"
         - task: ArchiveFiles@2
           inputs:
-            rootFolderOrFile: '$(Build.Repository.LocalPath)/build'
+            rootFolderOrFile: '$(Build.Repository.LocalPath)/dist'
             includeRootFolder: true
             archiveType: 'zip'
             archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
