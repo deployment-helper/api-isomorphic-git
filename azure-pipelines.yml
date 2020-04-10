@@ -70,3 +70,39 @@ stages:
         - script: 
             yes | gcloud app deploy '$(System.ArtifactsDirectory)/dist/dist'
           displayName: "Deploy to AppEngine"
+      - job: "Deploy_to_Prod"
+        displayName: "DeployTODev"
+        condition: "and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))"
+        variables: 
+         - group: "ProdEnv"
+        steps:
+        - task: DownloadBuildArtifacts@0
+          inputs:
+            buildType: 'current'
+            downloadType: 'single'
+            artifactName: 'build'
+            downloadPath: '$(System.ArtifactsDirectory)'
+        - task: ExtractFiles@1
+          inputs:
+            archiveFilePatterns: '$(System.ArtifactsDirectory)/build/$(Build.BuildId).zip'
+            destinationFolder: '$(System.ArtifactsDirectory)/dist'
+            cleanDestinationFolder: true
+        - task: DownloadSecureFile@1
+          displayName: "Download GCP Key"
+          name: "AuthKey"
+          inputs:
+            secureFile: 'prod-quiz-platform-7445bd9834fb.json'
+            retryCount: '2'
+        - script: |
+            wget https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.tar.gz
+            tar zxvf google-cloud-sdk.tar.gz && ./google-cloud-sdk/install.sh --quiet --usage-reporting=false --path-update=true
+            PATH="google-cloud-sdk/bin:${PATH}"
+            gcloud --quiet components update
+          displayName: 'install gcloud SDK'
+        - script: |
+            gcloud auth activate-service-account --key-file $(AuthKey.secureFilePath)
+            gcloud config set project $(GCP_PROJECT_NAME)
+          displayName: 'Activate Service Account'
+        - script: 
+            yes | gcloud app deploy '$(System.ArtifactsDirectory)/dist/dist'
+          displayName: "Deploy to AppEngine"
