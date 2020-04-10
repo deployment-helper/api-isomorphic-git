@@ -71,7 +71,7 @@ stages:
             yes | gcloud app deploy '$(System.ArtifactsDirectory)/dist/dist'
           displayName: "Deploy to AppEngine"
       - job: "Deploy_to_Prod"
-        displayName: "DeployTODev"
+        displayName: "DeployToProd"
         condition: "and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))"
         variables: 
          - group: "ProdEnv"
