@@ -17,6 +17,8 @@ stages:
           displayName: "Installing Dependencies"
         - script: npm run build:webpack
           displayName: "Building Package"
+        - script: ls . && pwd 
+          displayName: "LS"
         - task: ArchiveFiles@2
           inputs:
             rootFolderOrFile: '$(Build.Repository.LocalPath)/build'
