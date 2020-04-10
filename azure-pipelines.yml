@@ -60,7 +60,8 @@ stages:
           displayName: 'install gcloud SDK'
         - script:
             gcloud auth activate-service-account --key-file $(AuthKey.secureFilePath)
+            gcloud config set project $(GCP_PROJECT_NAME)
           displayName: 'Activate Service Account'
         - script: 
-            gcloud app deploy '$(System.ArtifactsDirectory)/dist --project=$(GCP_PROJECT_NAME)'
+            gcloud app deploy '$(System.ArtifactsDirectory)/dist'
           displayName: "Deploy to AppEngine"
