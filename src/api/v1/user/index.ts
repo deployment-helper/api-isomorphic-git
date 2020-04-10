@@ -8,9 +8,9 @@ const router:Router = Router();
 router.use(customErrorHandler);
 router.post('/',(req:Request,resp:Response)=>{
     const body:any = req.body;
-    const validateResult:ValidationResult =  userSchema.validate(body);
-    if(validateResult.error){
-        throw new ErrorBadReq(validateResult.error.message);
+    const validationResult:ValidationResult =  userSchema.validate(body);
+    if(validationResult.error){
+        throw new ErrorBadReq(validationResult.error.message);
     }
     const user = new User(body.firstName,body.lastName,body.email,body.password);
     user.save().then((writeResult:any)=>{

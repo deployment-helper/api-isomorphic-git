@@ -20,6 +20,16 @@ const userSchema:ObjectSchema = Joi.object({
     .required()
 });
 
+const loginSchema:ObjectSchema = Joi.object({
+    email:Joi.string()
+    .email()
+    .required(),
+    password:Joi.string()
+    .min(6)
+    .max(16)
+    .required()
+})
 export {
-    userSchema
+    userSchema,
+    loginSchema
 };

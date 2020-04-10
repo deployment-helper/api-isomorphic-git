@@ -13,10 +13,6 @@ export class User extends BaseModel {
         this.email = email;
         this.password = password;
     }
-    async validate(email: string, password: string): Promise<any> {
-        const querySnapshot: FirebaseFirestore.QuerySnapshot =  await this.colRef.where('email','==',email).where('password','==',password).get();
-        return querySnapshot.empty;
-    }
     save():Promise<any>{
         return super.save(this.toObject());
     }
