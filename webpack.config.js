@@ -2,6 +2,7 @@ const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
 module.exports = {
   entry: './server.ts',
+  mode: 'development',
   target: "node",
   module: {
     rules: [
@@ -26,4 +27,7 @@ module.exports = {
       { from: './package.json', to: './package.json' },
     ]),
   ],
+  externals: {
+    '@google-cloud/storage': 'commonjs @google-cloud/storage'
+},
 };
