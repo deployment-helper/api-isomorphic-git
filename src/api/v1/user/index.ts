@@ -19,7 +19,7 @@ router.post('/',(req:Request,resp:Response,next:NextFunction)=>{
     user.email = body.email;
     user.password = body.password;
     user.save().then((result:Document)=>{
-        resp.send(200).json(result);
+        resp.sendStatus(200).json(result);
     }).catch((err:Error)=>{
         next(err); 
     });

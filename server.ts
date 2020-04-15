@@ -1,6 +1,13 @@
 import express from 'express';
+import mongoose from 'mongoose';
 import { apiRouter } from './src/api'
 import { customErrorHandler } from './src/middleware'
+import {Config} from './src/config';
+/**
+ * Mongodb connection 
+ */
+mongoose.connect(Config.DB_CONNECTION_STRING,{useNewUrlParser: true});
+
 const app = express();
 app.use(express.json());
 const port = process.env.PORT || 3000;

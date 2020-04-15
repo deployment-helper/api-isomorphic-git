@@ -4,6 +4,6 @@ describe("Constants Tests",()=>{
         expect(Database).toBeTruthy();
     });
     test("COLLECTION_NAME should defined",()=>{
-        expect(Database.COLLECTION_NAME).toBeTruthy();
+        expect(Database.NAME).toBeTruthy();
     });
 });
