@@ -61,6 +61,7 @@ stages:
             cleanDestinationFolder: true
         - script: |
             node '$(System.ArtifactsDirectory)/dist/dist/app.js' > '$(System.ArtifactsDirectory)/dist/dist/app.yaml'
+            cat '$(System.ArtifactsDirectory)/dist/dist/app.yaml'
           displayName: "Generate AppEngine config"
         - task: DownloadSecureFile@1
           displayName: "Download GCP Key"
