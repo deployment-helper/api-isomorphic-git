@@ -7,6 +7,6 @@ automatic_scaling:
     max_concurrent_requests: ${process.env.MAX_CONCURRENT_REQUESTS || 50}
 env_variables:
     DATABASE_NAME: ${process.env.DATABASE_NAME}
-    DB_CONNECTION_STRING: mongodb+srv://${process.env.DB_USER_NAME}:${DB_PASWORD}@${process.env.DB_DOMAIN}
+    DB_CONNECTION_STRING: mongodb+srv://${process.env.DB_USER_NAME}:${process.env.DB_PASWORD}@${process.env.DB_DOMAIN}
     DEBUG: ${process.env.DEBUG}
 `);

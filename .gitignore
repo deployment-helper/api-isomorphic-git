@@ -63,3 +63,4 @@ typings/
 build/
 dist
 test-report.xml
+app.yaml
