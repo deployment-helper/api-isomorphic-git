@@ -75,7 +75,7 @@ stages:
             arguments: '$(DB_CONNECTION_STRING)'
           displayName: "Generate AppEngine config"
         - script:
-            cat app.yaml
+            cat '$(System.ArtifactsDirectory)/dist/dist/app.yaml'
           displayName: "Debug"
         - task: DownloadSecureFile@1
           displayName: "Download GCP Key"
