@@ -8,4 +8,5 @@ automatic_scaling:
 env_variables:
     DATABASE_NAME: ${process.env.DATABASE_NAME}
     DB_CONNECTION_STRING: ${process.env.DB_CONNECTION_STRING}
+    DEBUG: ${process.env.DEBUG}
 `);
