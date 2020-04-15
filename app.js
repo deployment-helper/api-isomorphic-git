@@ -7,6 +7,6 @@ automatic_scaling:
     max_concurrent_requests: ${process.env.max_concurrent_requests || 50}
 env_variables:
     DATABASE_NAME: ${process.env.DATABASE_NAME}
-    DB_CONNECTION_STRING: ${process.env.DB_CONNECTION_STRING}
+    DB_CONNECTION_STRING: ${process.argv[2]}
     DEBUG: ${process.env.DEBUG}
 `);
