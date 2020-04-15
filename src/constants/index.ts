@@ -1,3 +1,3 @@
 export enum Database{
-    COLLECTION_NAME = "user"
+    NAME = "user"
 }

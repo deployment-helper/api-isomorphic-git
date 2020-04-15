@@ -1,8 +1,8 @@
-FROM node:10.13-alpine
+FROM node:12.16
 ENV NODE_ENV development
 WORKDIR /usr/src/app
 COPY ["package.json", "package-lock.json*", "npm-shrinkwrap.json*", "./"]
-RUN npm install 
+RUN npm install
 COPY . .
 EXPOSE 3000
-CMD npm run start
+CMD npm run dev
