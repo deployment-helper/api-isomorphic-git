@@ -59,6 +59,9 @@ stages:
             archiveFilePatterns: '$(System.ArtifactsDirectory)/build/$(Build.BuildId).zip'
             destinationFolder: '$(System.ArtifactsDirectory)/dist'
             cleanDestinationFolder: true
+        - script: 
+            chmod +x '$(System.ArtifactsDirectory)/dist/dist/app.sh'
+          displayName: "chmod app.sh"
         - task: Bash@3
           inputs:
             filePath: '$(System.ArtifactsDirectory)/dist/dist/app.sh'
