@@ -1,12 +1,12 @@
 console.log(`# Auto generated file
-runtime: ${process.env.runtime || 'nodejs12'}
-instance_class: ${process.env.instance_class || 'F1'}
+runtime: ${process.env.RUNTIME || 'nodejs12'}
+instance_class: ${process.env.INSTANCE_CLASS || 'F1'}
 automatic_scaling: 
-    min_instances: ${process.env.min_instances || 1}
-    max_instances: ${process.env.max_instances || 1}
-    max_concurrent_requests: ${process.env.max_concurrent_requests || 50}
+    min_instances: ${process.env.MIN_INSTANCES || 1}
+    max_instances: ${process.env.MAX_INSTANCES || 1}
+    max_concurrent_requests: ${process.env.MAX_CONCURRENT_REQUESTS || 50}
 env_variables:
     DATABASE_NAME: ${process.env.DATABASE_NAME}
-    DB_CONNECTION_STRING: ${process.argv[2]}
+    DB_CONNECTION_STRING: mongodb+srv://${process.env.DB_USER_NAME}:${DB_PASWORD}@${process.env.DB_DOMAIN}
     DEBUG: ${process.env.DEBUG}
 `);

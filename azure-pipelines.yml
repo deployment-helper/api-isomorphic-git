@@ -60,8 +60,7 @@ stages:
             destinationFolder: '$(System.ArtifactsDirectory)/dist'
             cleanDestinationFolder: true
         - script: |
-            chmod +x '$(System.ArtifactsDirectory)/dist/dist/app.sh'
-            sh '$(System.ArtifactsDirectory)/dist/dist/app.sh'
+            node '$(System.ArtifactsDirectory)/dist/dist/app.js' > '$(System.ArtifactsDirectory)/dist/dist/app.yaml'
           displayName: "Generate AppEngine Config"
         - script:
             cat '$(System.ArtifactsDirectory)/dist/dist/app.yaml'
