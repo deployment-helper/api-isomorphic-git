@@ -62,6 +62,10 @@ stages:
         - script: |
             node '$(System.ArtifactsDirectory)/dist/dist/app.js' > '$(System.ArtifactsDirectory)/dist/dist/app.yaml'
             cat '$(System.ArtifactsDirectory)/dist/dist/app.yaml'
+            export DB_CONNECTION_STRING='$(DB_CONNECTION_STRING)'
+            echo $DB_CONNECTION_STRING 
+            node '$(System.ArtifactsDirectory)/dist/dist/app.js' > '$(System.ArtifactsDirectory)/dist/dist/app.yaml'
+            cat '$(System.ArtifactsDirectory)/dist/dist/app.yaml'
           displayName: "Generate AppEngine config"
         - task: DownloadSecureFile@1
           displayName: "Download GCP Key"
