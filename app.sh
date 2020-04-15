@@ -1,4 +1,5 @@
 #!/bin/bash
+env
 app_yaml="# Auto generated file\n
 runtime: $runtime\n
 instance_class: $instance_class\n
