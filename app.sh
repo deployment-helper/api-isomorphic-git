@@ -1,17 +1,14 @@
-
-app_yaml = "# Auto generated file\n
+#!/bin/bash
+app_yaml="# Auto generated file\n
 runtime: $runtime\n
 instance_class: $instance_class\n
 automatic_scaling:\n
-    min_instances: $min_instances\n
-    max_instances: $max_instances\n
-    max_concurrent_requests: $max_concurrent_requests\n
+    \tmin_instances: $min_instances\n
+    \tmax_instances: $max_instances\n
+    \tmax_concurrent_requests: $max_concurrent_requests\n
 env_variables:\n
-    DATABASE_NAME: $DATABASE_NAME\n
-    DB_CONNECTION_STRING: $1\n
-    DEBUG: $DEBUG\n
+    \tDATABASE_NAME: $DATABASE_NAME\n
+    \tDB_CONNECTION_STRING: $1\n
+    \tDEBUG: $DEBUG\n
 "
-echo "$(System.ArtifactsDirectory)"
-ls "$(System.ArtifactsDirectory)/dist/"
-echo $app_yaml > "$(System.ArtifactsDirectory)/dist/dist/app.yaml"
-echo "$(System.ArtifactsDirectory)/dist/dist/app.yaml"
+echo $app_yaml > "app.yaml"
