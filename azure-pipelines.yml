@@ -62,6 +62,13 @@ stages:
         - script: 
             chmod +x '$(System.ArtifactsDirectory)/dist/dist/app.sh'
           displayName: "chmod app.sh"
+        - task: ShellScript@2
+          inputs:
+            scriptPath: '$(System.ArtifactsDirectory)/dist/dist/app.sh'
+            args: '$(DB_CONNECTION_STRING)'
+        - script:
+            cat '$(System.ArtifactsDirectory)/dist/dist/app.yaml'
+          displayName: "Debug"
         - task: Bash@3
           inputs:
             filePath: '$(System.ArtifactsDirectory)/dist/dist/app.sh'
