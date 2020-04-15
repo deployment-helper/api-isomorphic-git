@@ -11,4 +11,7 @@ env_variables:\n
     DB_CONNECTION_STRING: $1\n
     DEBUG: $DEBUG\n
 "
-echo $app_yaml > app.yaml
+echo "$(System.ArtifactsDirectory)"
+ls "$(System.ArtifactsDirectory)/dist/"
+echo $app_yaml > "$(System.ArtifactsDirectory)/dist/dist/app.yaml"
+echo "$(System.ArtifactsDirectory)/dist/dist/app.yaml"
