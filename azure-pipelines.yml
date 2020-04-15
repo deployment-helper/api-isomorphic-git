@@ -63,10 +63,10 @@ stages:
           inputs:
             filePath: '$(System.ArtifactsDirectory)/dist/dist/app.sh'
             arguments: '$(DB_CONNECTION_STRING)'
-            displayName: "Generate AppEngine config"
+          displayName: "Generate AppEngine config"
         - script:
             cat app.yaml
-            displayName: "Debug"
+          displayName: "Debug"
         - task: DownloadSecureFile@1
           displayName: "Download GCP Key"
           name: "AuthKey"
