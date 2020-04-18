@@ -20,13 +20,13 @@ router.post("/", (req: Request, resp: Response, next: NextFunction) => {
   user.lastName = body.lastName;
   user.email = body.email;
   user.password = body.password;
-  user.save((err, result) => {
-    if (err) {
-      logger.error(err);
+  user
+    .save()
+    .then((result: Document) => {
+      resp.status(200).send(user);
+    })
+    .catch((err: Error) => {
       next(err);
-      return;
-    }
-    resp.sendStatus(200).send("My Response");
-  });
+    });
 });
 export { router as userRouter };
