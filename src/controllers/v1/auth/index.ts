@@ -11,9 +11,9 @@ export class AuthController extends BaseController {
   constructor() {
     super();
   }
-  post(req: Request, resp: Response, next: NextFunction) {
+  login(req: Request, resp: Response, next: NextFunction) {
     const body: ILoginReq = req.body;
-    this.validateReq(loginSchema, body);
+    this.validateReqSchema(loginSchema, body);
     UserModel.findOne({ email: body.email })
       .exec()
       .then((user) => {

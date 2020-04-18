@@ -7,5 +7,5 @@ export class Config {
     : "jwt_secret";
   public static JWT_EXPIRE_TIME = process.env.JWT_EXPIRE_TIME
     ? process.env.JWT_EXPIRE_TIME
-    : "2h";
+    : "2m";
 }

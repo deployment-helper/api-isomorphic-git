@@ -1,4 +1,5 @@
 import { Document } from "mongoose";
+import { Request } from "express";
 interface IUser extends Document {
   email: string;
   firstName: string;
@@ -12,4 +13,12 @@ interface ILoginReq {
   email: string;
   password: string;
 }
-export { IUser, ILoginReq };
+
+interface IChangePassword {
+  oldPassword: string;
+  newPassword: string;
+}
+interface JwtRequest extends Request {
+  user?: any;
+}
+export { IUser, ILoginReq, JwtRequest, IChangePassword };

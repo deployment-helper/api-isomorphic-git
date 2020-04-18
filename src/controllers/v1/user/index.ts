@@ -2,18 +2,23 @@ import { Request, Response, NextFunction } from "express";
 import bcrypt from "bcrypt";
 import { Document } from "mongoose";
 import { BaseController } from "../../base.controller";
-import { IUser } from "../../../model/model.interfaces";
-import { userSchema } from "../../../validation";
+import {
+  IUser,
+  JwtRequest,
+  IChangePassword,
+} from "../../../model/model.interfaces";
+import { userSchema, changePasswordSchema } from "../../../validation";
 import { UserModel } from "../../../model";
 import { User as UserCons, BCRYPT } from "../../../constants";
+import { ErrorUnAuthorizedAccess } from "../../../error";
 
 export class UserController extends BaseController {
   constructor() {
     super();
   }
-  post(req: Request, resp: Response, next: NextFunction) {
+  addUser(req: Request, resp: Response, next: NextFunction) {
     const body: IUser = req.body;
-    this.validateReq(userSchema, body);
+    this.validateReqSchema(userSchema, body);
     const user = new UserModel();
     user.firstName = body.firstName;
     user.lastName = body.lastName;
@@ -29,4 +34,51 @@ export class UserController extends BaseController {
         next(err);
       });
   }
+  changePassword(req: JwtRequest, resp: Response, next: NextFunction) {
+    const body: IChangePassword = req.body;
+    let user: any;
+    this.validateReqSchema(changePasswordSchema, body);
+    if (req.params.email === req.user.email) {
+      UserModel.findOne({ email: req.params.email })
+        .exec()
+        .then(
+          (resultDoc): Promise<boolean> => {
+            user = resultDoc;
+            if (user !== null) {
+              return bcrypt.compare(body.oldPassword, user.password);
+            } else {
+              throw new ErrorUnAuthorizedAccess("User does not exist.");
+            }
+          }
+        )
+        .then((isValid: boolean) => {
+          if (isValid) {
+            try {
+              user.password = bcrypt.hashSync(
+                body.newPassword,
+                BCRYPT.SALT_ROUNDS
+              );
+              user.save();
+              resp.status(200).send(user);
+            } catch (error) {
+              throw error;
+            }
+          } else {
+            throw new ErrorUnAuthorizedAccess("In-Valid Email or Password");
+          }
+        })
+        .catch((err: Error) => {
+          next(err);
+        });
+    } else {
+      throw new ErrorUnAuthorizedAccess(
+        "User not autorized to update password."
+      );
+    }
+  }
+  updateUserDetails(req: Request, resp: Response, next: NextFunction) {}
+
+  createProject() {}
+  assignProjectRoles() {}
+  removeProjectRoles() {}
 }

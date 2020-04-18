@@ -8,6 +8,10 @@ export enum BCRYPT {
 
 export enum User {
   DEFAULT_SCOPE = "app.project.create",
+  PROJECT_READ_PERMISSION_TEMPLATE = "project.`${obj.projectId}.read`",
+  PROJECT_WRITE_PERMISSION_TEMPLATE = "project.`${obj.projectId}.write`",
+  PROJECT_DELETE_PERMISSION_TEMPLATE = "project.`${obj.projectId}.delete`",
+  PROJECT_MANAGE_USER_PERMISSION_TEMPLATE = "project.`${obj.projectId}.manageuser`",
 }
 
 export const ErrorMessages = {

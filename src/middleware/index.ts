@@ -20,4 +20,9 @@ function customErrorHandler(
   resp.status(500).send(err);
 }
 
-export { customErrorHandler };
+function requestJwtValidation(
+  req: Request,
+  resp: Response,
+  next: NewableFunction
+) {}
+export { customErrorHandler, requestJwtValidation };
