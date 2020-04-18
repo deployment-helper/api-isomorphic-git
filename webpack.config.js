@@ -1,5 +1,6 @@
 const path = require("path");
 const CopyPlugin = require("copy-webpack-plugin");
+const nodeExternals = require("webpack-node-externals");
 module.exports = {
   entry: "./server.ts",
   mode: "development",
@@ -27,7 +28,5 @@ module.exports = {
       { from: "./package.json", to: "./package.json" },
     ]),
   ],
-  externals: {
-    "@google-cloud/storage": "commonjs @google-cloud/storage",
-  },
+  externals: [nodeExternals()],
 };
