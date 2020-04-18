@@ -3,8 +3,7 @@ import { loginSchema } from "../../../validation";
 import { ValidationResult } from "@hapi/joi";
 import { ErrorBadReq } from "../../../error";
 const router = Router();
-router.post("/", (req: Request, resp: Response) => {
-  resp.send("Under Development");
-});
+
+router.post("/login", (req: Request, resp: Response) => {});
 
 export { router as authRouter };

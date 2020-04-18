@@ -1,11 +1,13 @@
 import { Request, Response } from "express";
 import { ErrorBadReq } from "../error";
+import logger from "../logger";
 function customErrorHandler(
   err: Error,
   req: Request,
   resp: Response,
   next: any
 ) {
+  console.log(err);
   if (resp.headersSent) {
     return next(err);
   }
