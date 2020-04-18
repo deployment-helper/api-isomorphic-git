@@ -1,12 +1,13 @@
 import { Router, Request, Response, NextFunction } from "express";
 import { Document } from "mongoose";
+import bcrypt from "bcrypt";
 import { userSchema } from "../../../validation";
 import { ValidationResult } from "@hapi/joi";
 import { ErrorBadReq } from "../../../error";
 import { User } from "../../../model";
 import { IUser } from "../../../model/model.interfaces";
-import logger from "../../../logger";
-import { customErrorHandler } from "../../../middleware";
+import { BCRYPT } from "../../../constants";
+
 const router: Router = Router();
 
 router.post("/", (req: Request, resp: Response, next: NextFunction) => {
@@ -19,7 +20,7 @@ router.post("/", (req: Request, resp: Response, next: NextFunction) => {
   user.firstName = body.firstName;
   user.lastName = body.lastName;
   user.email = body.email;
-  user.password = body.password;
+  user.password = bcrypt.hashSync(body.password, BCRYPT.SALT_ROUNDS);
   user
     .save()
     .then((result: Document) => {
