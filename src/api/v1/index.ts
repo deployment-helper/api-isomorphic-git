@@ -1,7 +1,8 @@
-import {router} from "../../router";
-import {userRouter} from './user';
-import {authRouter} from './auth';
-router.use('/user',userRouter);
-router.use('/auth',authRouter);
+import { Router } from "express";
+import { userRouter } from "./user";
+import { authRouter } from "./auth";
+const router = Router();
+router.use("/user", userRouter);
+router.use("/auth", authRouter);
 
-export {router as v1Router}
+export { router as v1Router };

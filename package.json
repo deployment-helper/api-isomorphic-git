@@ -38,9 +38,11 @@
     "@types/node": "^13.11.0",
     "copy-webpack-plugin": "^5.1.1",
     "eslint": "^6.8.0",
+    "husky": "^4.2.5",
     "jest": "^25.1.0",
     "jest-junit-reporter": "^1.1.0",
     "nodemon": "^2.0.2",
+    "pretty-quick": "^2.0.1",
     "rimraf": "^3.0.2",
     "ts-jest": "^25.3.1",
     "ts-loader": "^6.2.2",
@@ -48,5 +50,10 @@
     "typescript": "^3.8.3",
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
   }
 }
