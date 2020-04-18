@@ -4,7 +4,12 @@ interface IUser extends Document {
   firstName: string;
   lastName: string;
   password: string;
-  scopes: [string];
+  permissions: [string];
+  jwtObject: any;
 }
 
-export { IUser };
+interface ILoginReq {
+  email: string;
+  password: string;
+}
+export { IUser, ILoginReq };

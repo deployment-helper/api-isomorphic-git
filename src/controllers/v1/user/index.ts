@@ -19,7 +19,7 @@ export class UserController extends BaseController {
     user.lastName = body.lastName;
     user.email = body.email;
     user.password = bcrypt.hashSync(body.password, BCRYPT.SALT_ROUNDS);
-    user.scopes = [UserCons.DEFAULT_SCOPE];
+    user.permissions = [UserCons.DEFAULT_SCOPE];
     user
       .save()
       .then((result: Document) => {

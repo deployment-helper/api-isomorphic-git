@@ -1,3 +1,4 @@
+import { ErrorMessages } from "../constants";
 class BaseError extends Error {
   public statusCode: number;
   public name: string;
@@ -28,10 +29,22 @@ class ErrorBadReq extends BaseError {
       error,
       400,
       "BadRequest",
-      "Invalid request pyalod",
+      ErrorMessages[400].badRequest,
       "https://stackoverflow.com/search?q=bad+request"
     );
   }
 }
 
-export { ErrorBadReq };
+class ErrorUnAuthorizedAccess extends BaseError {
+  constructor(error: string) {
+    super(
+      error,
+      401,
+      "UnAutorizedAccess",
+      ErrorMessages[401].userDoesNotExist,
+      ""
+    );
+  }
+}
+
+export { ErrorBadReq, ErrorUnAuthorizedAccess };

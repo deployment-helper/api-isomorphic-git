@@ -9,3 +9,12 @@ export enum BCRYPT {
 export enum User {
   DEFAULT_SCOPE = "app.project.create",
 }
+
+export const ErrorMessages = {
+  "401": {
+    userDoesNotExist: "User does not exist",
+  },
+  "400": {
+    badRequest: "Invalid request pyalod",
+  },
+};
