@@ -7,7 +7,7 @@ import {
   JwtRequest,
   IChangePassword,
 } from "../../../model/model.interfaces";
-import { userSchema, changePasswordSchema } from "../../../validation";
+import { reqAddUserSchema, reqChangePasswordSchema } from "../../../validation";
 import { UserModel } from "../../../model";
 import { User as UserCons, BCRYPT } from "../../../constants";
 import { ErrorUnAuthorizedAccess } from "../../../error";
@@ -18,7 +18,7 @@ export class UserController extends BaseController {
   }
   addUser(req: Request, resp: Response, next: NextFunction) {
     const body: IUser = req.body;
-    this.validateReqSchema(userSchema, body);
+    this.validateReqSchema(reqAddUserSchema, body);
     const user = new UserModel();
     user.firstName = body.firstName;
     user.lastName = body.lastName;
@@ -37,7 +37,7 @@ export class UserController extends BaseController {
   changePassword(req: JwtRequest, resp: Response, next: NextFunction) {
     const body: IChangePassword = req.body;
     let user: any;
-    this.validateReqSchema(changePasswordSchema, body);
+    this.validateReqSchema(reqChangePasswordSchema, body);
     if (req.params.email === req.user.email) {
       UserModel.findOne({ email: req.params.email })
         .exec()

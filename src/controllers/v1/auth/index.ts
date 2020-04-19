@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import bcrypt from "bcrypt";
 import { BaseController } from "../../base.controller";
-import { loginSchema } from "../../../validation";
+import { regLoginSchema } from "../../../validation";
 import { ILoginReq, IUser } from "../../../model/model.interfaces";
 import UserModel from "../../../model/user.model";
 import { ErrorUnAuthorizedAccess } from "../../../error";
@@ -13,7 +13,7 @@ export class AuthController extends BaseController {
   }
   login(req: Request, resp: Response, next: NextFunction) {
     const body: ILoginReq = req.body;
-    this.validateReqSchema(loginSchema, body);
+    this.validateReqSchema(regLoginSchema, body);
     UserModel.findOne({ email: body.email })
       .exec()
       .then((user) => {
