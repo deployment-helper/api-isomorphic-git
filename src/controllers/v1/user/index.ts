@@ -8,11 +8,14 @@ import {
   IChangePassword,
   IUpdateUser,
   ICreateEntity,
+  IAssignRoles,
 } from "../../../models/model.interfaces";
 import {
   reqAddUserSchema,
   reqChangePasswordSchema,
   reqCreateEntitySchema,
+  reqUpdateUserSchema,
+  reqAssignRules,
 } from "../../../validation";
 import { UserModel } from "../../../models";
 import { User as UserCons, BCRYPT, User } from "../../../constants";
@@ -21,6 +24,7 @@ import { UserHelper } from "../../../helpers/user.helper";
 import { EntityHelper } from "../../../helpers/entity.helper";
 import { JwtHelper } from "../../../helpers/jwt.helper";
 import { Config } from "../../../config";
+import { Eval, createPermissionsBYRole } from "../../../util";
 
 export class UserController extends BaseController {
   constructor() {
@@ -93,6 +97,7 @@ export class UserController extends BaseController {
   updateUserDetails(req: JwtRequest, resp: Response, next: NextFunction) {
     const body: IUpdateUser = req.body;
     const jwtUser: IUser = req.user;
+    this.validateReqSchema(reqUpdateUserSchema, body);
     if (req.params.email === jwtUser.email) {
       UserModel.findOne({ email: jwtUser.email })
         .exec()
@@ -155,6 +160,48 @@ export class UserController extends BaseController {
       throw new ErrorUnAuthorizedAccess("User not autorized");
     }
   }
-  assignRoles() {}
-  removeRoles() {}
+  assignRoles(req: JwtRequest, resp: Response, next: NextFunction) {
+    const body: IAssignRoles = req.body;
+    const jwtUser: IUser = req.user;
+    this.validateReqSchema(reqAssignRules, body);
+    if (
+      JwtHelper.hasPermission(
+        jwtUser.permissions,
+        Eval.templateToString(
+          { entityId: req.params.entityId },
+          User.ENTITY_MANAGE_USER_PERMISSION_TEMPLATE
+        )
+      )
+    ) {
+      UserModel.findOne({ email: req.params.email })
+        .exec()
+        .then((user: IUser | null) => {
+          if (user !== null) {
+            const permissions = createPermissionsBYRole(
+              body.role,
+              req.params.entityId
+            );
+            const permissionSet: Set<string> = new Set<string>(
+              user.permissions
+            );
+            permissions.forEach((permission: string) => {
+              permissionSet.add(permission);
+            });
+            user.permissions = Array.from(permissionSet);
+            return user.save();
+          } else {
+            next(new ErrorUnAuthorizedAccess("User does not exist"));
+          }
+        })
+        .then((user: IUser | null | undefined) => {
+          resp.status(200).send(user);
+        })
+        .catch((err) => {
+          next(err);
+        });
+    } else {
+      throw new ErrorUnAuthorizedAccess("Not Authorized");
+    }
+  }
+  removeRoles(req: JwtRequest, resp: Response, next: NextFunction) {}
 }

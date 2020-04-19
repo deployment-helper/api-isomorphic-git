@@ -27,10 +27,15 @@ const reqCreateEntitySchema: ObjectSchema = Joi.object({
   entityId: Joi.string().min(6).required(),
   extraPermission: Joi.array().items(Joi.string),
 });
+
+const reqAssignRules: ObjectSchema = Joi.object({
+  role: Joi.string().valid("reader", "writer", "maintainer", "owner"),
+});
 export {
   reqAddUserSchema,
   regLoginSchema,
   reqChangePasswordSchema,
   reqUpdateUserSchema,
   reqCreateEntitySchema,
+  reqAssignRules,
 };

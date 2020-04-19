@@ -14,6 +14,12 @@ export enum User {
   ENTITY_MANAGE_USER_PERMISSION_TEMPLATE = "`entity.${obj.entityId}.manageuser`",
 }
 
+export enum DefaultRoles {
+  READER = "reader",
+  WRITER = "writer",
+  MAINTAINER = "maintainer",
+  OWNER = "owner",
+}
 export const ErrorMessages = {
   "401": {
     userDoesNotExist: "User does not exist",

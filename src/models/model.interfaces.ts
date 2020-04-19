@@ -31,6 +31,11 @@ interface ICreateEntity {
   entityId: string;
   extraPermission?: Array<string>;
 }
+
+interface IAssignRoles {
+  role: string;
+}
+
 export {
   IUser,
   ILoginReq,
@@ -38,4 +43,5 @@ export {
   IChangePassword,
   IUpdateUser,
   ICreateEntity,
+  IAssignRoles,
 };
