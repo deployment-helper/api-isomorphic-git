@@ -6,11 +6,11 @@ import {
   IUser,
   JwtRequest,
   IChangePassword,
-} from "../../../model/model.interfaces";
+} from "../../../models/model.interfaces";
 import { reqAddUserSchema, reqChangePasswordSchema } from "../../../validation";
-import { UserModel } from "../../../model";
+import { UserModel } from "../../../models";
 import { User as UserCons, BCRYPT } from "../../../constants";
-import { ErrorUnAuthorizedAccess } from "../../../error";
+import { ErrorUnAuthorizedAccess } from "../../../errors";
 
 export class UserController extends BaseController {
   constructor() {

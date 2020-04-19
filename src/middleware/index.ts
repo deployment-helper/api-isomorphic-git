@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { ErrorBadReq, ErrorUnAuthorizedAccess } from "../error";
+import { ErrorBadReq, ErrorUnAuthorizedAccess } from "../errors";
 import logger from "../logger";
 function customErrorHandler(
   err: Error,

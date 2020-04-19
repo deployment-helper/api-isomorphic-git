@@ -2,9 +2,9 @@ import { Request, Response, NextFunction } from "express";
 import bcrypt from "bcrypt";
 import { BaseController } from "../../base.controller";
 import { regLoginSchema } from "../../../validation";
-import { ILoginReq, IUser } from "../../../model/model.interfaces";
-import UserModel from "../../../model/user.model";
-import { ErrorUnAuthorizedAccess } from "../../../error";
+import { ILoginReq, IUser } from "../../../models/model.interfaces";
+import UserModel from "../../../models/user.model";
+import { ErrorUnAuthorizedAccess } from "../../../errors";
 import { JWT } from "../../../jwt";
 import { Config } from "../../../config";
 export class AuthController extends BaseController {

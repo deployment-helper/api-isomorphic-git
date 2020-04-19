@@ -1,4 +1,4 @@
-import { ErrorBadReq, ErrorUnAuthorizedAccess } from "../error";
+import { ErrorBadReq, ErrorUnAuthorizedAccess } from "../errors";
 import { ObjectSchema, ValidationResult } from "@hapi/joi";
 import { Request, Response, NextFunction } from "express";
 import logger from "../logger";
