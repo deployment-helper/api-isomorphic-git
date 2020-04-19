@@ -21,4 +21,36 @@ function createPermissionsBYRole(
       throw new ErrorBadReq("Role does not exist");
   }
 }
-export { Eval, createPermissionsBYRole };
+
+function removePermissions(
+  permissions: Set<string>,
+  permissionsToRemove: Array<string>
+): Set<string> {
+  permissionsToRemove.forEach((permission) => {
+    permissions.delete(permission);
+  });
+  return permissions;
+}
+
+function createNewPermissions(
+  permissions: Set<string>,
+  role: string,
+  entityId: string
+): Array<string> {
+  permissions = removePermissions(
+    permissions,
+    createPermissionsBYRole(DefaultRoles.OWNER, entityId)
+  );
+  const newPermissions = createPermissionsBYRole(role, entityId);
+  newPermissions.forEach((permission) => {
+    permissions.add(permission);
+  });
+  return Array.from(permissions);
+}
+
+export {
+  Eval,
+  createPermissionsBYRole,
+  createNewPermissions,
+  removePermissions,
+};
