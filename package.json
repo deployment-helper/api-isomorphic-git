@@ -6,6 +6,7 @@
   "scripts": {
     "test": "jest",
     "test:cov": "jest --coverage",
+    "test:watch": "jest --watch",
     "dev": "nodemon",
     "build": "npm run clean && tsc",
     "build:webpack": "webpack",
