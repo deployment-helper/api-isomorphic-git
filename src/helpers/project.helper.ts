@@ -1,6 +1,6 @@
 import { User } from "../constants";
-import { Eval } from "./eval";
-export class Project {
+import { Eval } from "../util/eval";
+export class ProjectHelper {
   private prjectId: string;
   constructor(projectId: string) {
     this.prjectId = projectId;

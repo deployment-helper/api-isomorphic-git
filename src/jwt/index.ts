@@ -1,5 +1,9 @@
 import jsonwebtoken from "jsonwebtoken";
 
+/**
+ * @deprecated
+ * This class has been depriciated pelase use JwtHelper for.
+ */
 export class JWT {
   public static createToken = <T extends object>(
     obj: T,
