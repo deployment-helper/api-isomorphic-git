@@ -8,7 +8,6 @@ import logger from "./src/logger";
 /**
  * Mongodb connection
  */
-logger.info(`Connection String ${Config.DB_CONNECTION_STRING}`);
 mongoose.connect(Config.DB_CONNECTION_STRING, { useNewUrlParser: true });
 
 const app = express();
