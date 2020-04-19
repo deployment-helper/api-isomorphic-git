@@ -7,11 +7,11 @@ export enum BCRYPT {
 }
 
 export enum User {
-  DEFAULT_SCOPE = "app.project.create",
-  PROJECT_READ_PERMISSION_TEMPLATE = "project.`${obj.projectId}.read`",
-  PROJECT_WRITE_PERMISSION_TEMPLATE = "project.`${obj.projectId}.write`",
-  PROJECT_DELETE_PERMISSION_TEMPLATE = "project.`${obj.projectId}.delete`",
-  PROJECT_MANAGE_USER_PERMISSION_TEMPLATE = "project.`${obj.projectId}.manageuser`",
+  DEFAULT_PERMISSION = "app.enity.create",
+  ENTITY_READ_PERMISSION_TEMPLATE = "`entity.${obj.entityId}.read`",
+  ENTITY_WRITE_PERMISSION_TEMPLATE = "`entity.${obj.entityId}.write`",
+  ENTITY_DELETE_PERMISSION_TEMPLATE = "`entity.${obj.entityId}.delete`",
+  ENTITY_MANAGE_USER_PERMISSION_TEMPLATE = "`entity.${obj.entityId}.manageuser`",
 }
 
 export const ErrorMessages = {

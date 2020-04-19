@@ -6,11 +6,21 @@ import {
   IUser,
   JwtRequest,
   IChangePassword,
+  IUpdateUser,
+  ICreateEntity,
 } from "../../../models/model.interfaces";
-import { reqAddUserSchema, reqChangePasswordSchema } from "../../../validation";
+import {
+  reqAddUserSchema,
+  reqChangePasswordSchema,
+  reqCreateEntitySchema,
+} from "../../../validation";
 import { UserModel } from "../../../models";
-import { User as UserCons, BCRYPT } from "../../../constants";
+import { User as UserCons, BCRYPT, User } from "../../../constants";
 import { ErrorUnAuthorizedAccess } from "../../../errors";
+import { UserHelper } from "../../../helpers/user.helper";
+import { EntityHelper } from "../../../helpers/entity.helper";
+import { JwtHelper } from "../../../helpers/jwt.helper";
+import { Config } from "../../../config";
 
 export class UserController extends BaseController {
   constructor() {
@@ -24,7 +34,8 @@ export class UserController extends BaseController {
     user.lastName = body.lastName;
     user.email = body.email;
     user.password = bcrypt.hashSync(body.password, BCRYPT.SALT_ROUNDS);
-    user.permissions = [UserCons.DEFAULT_SCOPE];
+    user.permissions = new Array<string>();
+    user.permissions.push(UserCons.DEFAULT_PERMISSION);
     user
       .save()
       .then((result: Document) => {
@@ -39,6 +50,9 @@ export class UserController extends BaseController {
     let user: any;
     this.validateReqSchema(reqChangePasswordSchema, body);
     if (req.params.email === req.user.email) {
+      /**
+       * TODO: should use userHelper for login
+       */
       UserModel.findOne({ email: req.params.email })
         .exec()
         .then(
@@ -76,9 +90,71 @@ export class UserController extends BaseController {
       );
     }
   }
-  updateUserDetails(req: Request, resp: Response, next: NextFunction) {}
+  updateUserDetails(req: JwtRequest, resp: Response, next: NextFunction) {
+    const body: IUpdateUser = req.body;
+    const jwtUser: IUser = req.user;
+    if (req.params.email === jwtUser.email) {
+      UserModel.findOne({ email: jwtUser.email })
+        .exec()
+        .then((user: IUser | null) => {
+          if (user === null) {
+            next(new ErrorUnAuthorizedAccess("User not exist."));
+            return null;
+          } else {
+            user.email = body.email ? body.email : user.email;
+            user.firstName = body.firstName ? body.firstName : user.firstName;
+            user.lastName = body.lastName ? body.lastName : user.lastName;
+            return user.save();
+          }
+        })
+        .then((user: IUser | null | undefined) => {
+          if (user !== null || user !== undefined) {
+            resp.status(200).send(user);
+          }
+        });
+    } else {
+      // TODO: Error messages should be standard
+      throw new ErrorUnAuthorizedAccess("Not Authorized");
+    }
+  }
 
-  createProject() {}
-  assignProjectRoles() {}
-  removeProjectRoles() {}
+  createEntity(req: JwtRequest, resp: Response, next: NextFunction) {
+    const body: ICreateEntity = req.body;
+    const jwtUser: IUser = req.user;
+    this.validateReqSchema(reqCreateEntitySchema, body);
+    if (
+      jwtUser.email === req.params.email &&
+      JwtHelper.hasPermission(jwtUser.permissions, User.DEFAULT_PERMISSION)
+    ) {
+      UserModel.findOne({ email: jwtUser.email })
+        .exec()
+        .then((user: IUser | null) => {
+          if (user === null) {
+            return null;
+          } else {
+            const prjHelper = new EntityHelper(body.entityId);
+            const permissions = prjHelper.createOwnerPermissions();
+            const permissionSet: Set<string> = new Set<string>(
+              user.permissions
+            );
+            permissions.forEach((permission: string) => {
+              permissionSet.add(permission);
+            });
+            user.permissions = Array.from(permissionSet);
+            return user.save();
+          }
+        })
+        .then((user: IUser | undefined | null) => {
+          if (user === null || user === undefined) {
+            next(new ErrorUnAuthorizedAccess("User does not exist"));
+          } else {
+            resp.status(200).send(user);
+          }
+        });
+    } else {
+      throw new ErrorUnAuthorizedAccess("User not autorized");
+    }
+  }
+  assignRoles() {}
+  removeRoles() {}
 }

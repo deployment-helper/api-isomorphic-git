@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(
   jwt({ secret: Config.JWT_SECRET }).unless({
     path: ["/api/v1/user", "/api/v1/auth/login", "/api/v1/health"],
-    method: ["POST", "GET"],
+    method: ["GET"],
   })
 );
 const port = process.env.PORT || 3000;

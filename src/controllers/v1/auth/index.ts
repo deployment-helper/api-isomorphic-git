@@ -14,6 +14,9 @@ export class AuthController extends BaseController {
   login(req: Request, resp: Response, next: NextFunction) {
     const body: ILoginReq = req.body;
     this.validateReqSchema(regLoginSchema, body);
+    /**
+     * TODO: should use user helper for login validation.
+     */
     UserModel.findOne({ email: body.email })
       .exec()
       .then((user) => {

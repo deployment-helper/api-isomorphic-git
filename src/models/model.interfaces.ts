@@ -5,7 +5,7 @@ interface IUser extends Document {
   firstName: string;
   lastName: string;
   password: string;
-  permissions: [string];
+  permissions: Array<string>;
   jwtObject: any;
 }
 
@@ -18,7 +18,24 @@ interface IChangePassword {
   oldPassword: string;
   newPassword: string;
 }
+interface IUpdateUser {
+  email?: string;
+  firstName?: string;
+  lastName?: string;
+}
 interface JwtRequest extends Request {
   user?: any;
 }
-export { IUser, ILoginReq, JwtRequest, IChangePassword };
+
+interface ICreateEntity {
+  entityId: string;
+  extraPermission?: Array<string>;
+}
+export {
+  IUser,
+  ILoginReq,
+  JwtRequest,
+  IChangePassword,
+  IUpdateUser,
+  ICreateEntity,
+};
