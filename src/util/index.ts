@@ -31,7 +31,7 @@ function removePermissions(
   });
   return permissions;
 }
-
+// TODO: update function name.
 function createNewPermissions(
   permissions: Set<string>,
   role: string,

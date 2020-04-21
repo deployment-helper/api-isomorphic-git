@@ -15,4 +15,5 @@ UserSchema.methods.jwtObject = function () {
   delete jwtObject.__v;
   return jwtObject;
 };
+
 export default mongoose.model<IUser>("User", UserSchema);

@@ -1,10 +1,8 @@
-import { ErrorBadReq, ErrorUnAuthorizedAccess } from "../errors";
+import { ErrorBadReq } from "../errors";
 import { ObjectSchema, ValidationResult } from "@hapi/joi";
 import { Request, Response, NextFunction } from "express";
 import logger from "../logger";
 import { Logger } from "winston";
-import { JWT } from "../jwt";
-import { Config } from "../config";
 export class BaseController {
   protected logger: Logger;
   constructor() {

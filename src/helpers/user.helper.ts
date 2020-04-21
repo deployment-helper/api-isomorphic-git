@@ -1,7 +1,6 @@
 import bcrypt from "bcrypt";
 import { IUser } from "../models/model.interfaces";
-import { UserModel } from "../models";
-
+import UserModel from "../models/user.model";
 export class UserHelper {
   public static login(email: string, password: string): Promise<IUser | null> {
     return new Promise((resolve: Function, reject: Function) => {

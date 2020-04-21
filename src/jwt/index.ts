@@ -15,7 +15,4 @@ export class JWT {
   public static verify = (token: string, secret: string): string | object => {
     return jsonwebtoken.verify(token, secret);
   };
-  public static checkPermission = (decodedToken: any, permission: string) => {
-    return true;
-  };
 }
