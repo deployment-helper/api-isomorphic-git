@@ -1,6 +1,6 @@
 console.log(`# Auto generated file
-runtime: ${process.env.RUNTIME || 'nodejs12'}
-instance_class: ${process.env.INSTANCE_CLASS || 'F1'}
+runtime: ${process.env.RUNTIME || "nodejs12"}
+instance_class: ${process.env.INSTANCE_CLASS || "F1"}
 automatic_scaling: 
     min_instances: ${process.env.MIN_INSTANCES || 1}
     max_instances: ${process.env.MAX_INSTANCES || 1}
@@ -11,4 +11,5 @@ env_variables:
     DB_PASWORD: ${process.env.DB_PASWORD}
     DB_DOMAIN: ${process.env.DB_DOMAIN}
     DEBUG: ${process.env.DEBUG}
+    CORS_WHITE_LIST: ${process.env.CORS_WHITE_LIST}
 `);
