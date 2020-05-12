@@ -1,8 +1,8 @@
 import Joi, { ObjectSchema } from "@hapi/joi";
 
 const reqAddUserSchema: ObjectSchema = Joi.object({
-  firstName: Joi.string().alphanum().min(3).max(50).required(),
-  lastName: Joi.string().alphanum().min(3).max(50).required(),
+  firstName: Joi.string().alphanum().min(3).max(50),
+  lastName: Joi.string().alphanum().min(3).max(50),
   email: Joi.string().email().required(),
   password: Joi.string().min(6).max(16).required(),
 });
