@@ -6,6 +6,7 @@ const UserSchema: Schema = new Schema({
   lastName: { type: String },
   password: { type: String, required: true },
   permissions: { type: [String], required: true },
+  mobile: { type: String },
 });
 
 UserSchema.methods.jwtObject = function () {

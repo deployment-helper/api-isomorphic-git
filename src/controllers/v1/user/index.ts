@@ -132,6 +132,7 @@ export class UserController extends BaseController {
             user.email = body.email ? body.email : user.email;
             user.firstName = body.firstName ? body.firstName : user.firstName;
             user.lastName = body.lastName ? body.lastName : user.lastName;
+            user.mobile = body.mobile ? body.mobile : user.mobile;
             return user.save();
           }
         })

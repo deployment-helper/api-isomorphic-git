@@ -12,6 +12,7 @@ const reqUpdateUserSchema: ObjectSchema = Joi.object({
   firstName: Joi.string().alphanum().min(3).max(50),
   lastName: Joi.string().alphanum().min(3).max(50),
   email: Joi.string().email(),
+  mobile: Joi.string().min(6).max(15),
 });
 
 const regLoginSchema: ObjectSchema = Joi.object({
