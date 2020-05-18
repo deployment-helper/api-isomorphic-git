@@ -1,5 +1,6 @@
 import Joi, { ObjectSchema } from "@hapi/joi";
 
+const reqGetUserSchema: ObjectSchema = Joi.object({});
 const reqAddUserSchema: ObjectSchema = Joi.object({
   firstName: Joi.string().alphanum().min(3).max(50),
   lastName: Joi.string().alphanum().min(3).max(50),
@@ -38,4 +39,5 @@ export {
   reqUpdateUserSchema,
   reqCreateEntitySchema,
   reqAssignRules,
+  reqGetUserSchema,
 };

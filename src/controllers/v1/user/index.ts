@@ -16,6 +16,7 @@ import {
   reqCreateEntitySchema,
   reqUpdateUserSchema,
   reqAssignRules,
+  reqGetUserSchema,
 } from "../../../validation";
 import { UserModel } from "../../../models";
 import {
@@ -36,6 +37,21 @@ import {
 export class UserController extends BaseController {
   constructor() {
     super();
+  }
+  getuser(req: JwtRequest, resp: Response, next: NextFunction) {
+    const body = req.body;
+    this.validateReqSchema(reqGetUserSchema, body);
+    UserModel.findOne({ email: req.user.email })
+      .exec()
+      .then((user) => {
+        if (user !== null) {
+          resp.status(200).send(user.jwtObject());
+        }
+        throw new ErrorUnAuthorizedAccess("User Does not exist");
+      })
+      .catch((err) => {
+        throw err;
+      });
   }
   addUser(req: Request, resp: Response, next: NextFunction) {
     const body: IUser = req.body;
