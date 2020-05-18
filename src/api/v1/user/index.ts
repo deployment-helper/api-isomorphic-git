@@ -2,6 +2,7 @@ import { Router, Request, Response, NextFunction } from "express";
 import { UserController } from "../../../controllers/v1/user";
 const router: Router = Router();
 const user = new UserController();
+router.get("/", user.getuser.bind(user));
 router.post("/", user.addUser.bind(user));
 router.put("/:email/change-password", user.changePassword.bind(user));
 router.put("/:email/update", user.updateUserDetails.bind(user));

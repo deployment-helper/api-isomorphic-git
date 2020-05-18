@@ -37,10 +37,12 @@ function createNewPermissions(
   role: string,
   entityId: string
 ): Array<string> {
+  // Remove previously assign permission.
   permissions = removePermissions(
     permissions,
     createPermissionsBYRole(DefaultRoles.OWNER, entityId)
   );
+  //create new permissions
   const newPermissions = createPermissionsBYRole(role, entityId);
   newPermissions.forEach((permission) => {
     permissions.add(permission);

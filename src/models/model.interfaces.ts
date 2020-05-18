@@ -5,6 +5,7 @@ interface IUser extends Document {
   firstName: string;
   lastName: string;
   password: string;
+  mobile?: string;
   permissions: Array<string>;
   jwtObject: any;
 }
@@ -22,6 +23,7 @@ interface IUpdateUser {
   email?: string;
   firstName?: string;
   lastName?: string;
+  mobile?: string;
 }
 interface JwtRequest extends Request {
   user?: any;
