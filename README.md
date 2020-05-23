@@ -1,8 +1,12 @@
 # User Management
 
+[![Build Status](https://dev.azure.com/vinaymavi/Quiz%20Platfrom/_apis/build/status/user-management?branchName=develop)](https://dev.azure.com/vinaymavi/Quiz%20Platfrom/_build/latest?definitionId=1&branchName=develop)
+
 User Management Backend service
 
 ## Local Development
+
+<!-- TODO Architecure daigram required -->
 
 - Run Mongodb db
 
@@ -22,4 +26,4 @@ Export `GOOGLE_APPLICATION_CREDENTIALS` environment variable
 
 `export GOOGLE_APPLICATION_CREDENTIALS='<service-account-key-file>'`
 
-Export `DATABASE_NAME` environment variable in monst of the case GCP project name
+Export `DATABASE_NAME` environment variable in monst of the casees it is similar to GCP project name.
