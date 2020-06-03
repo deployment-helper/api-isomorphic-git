@@ -38,6 +38,13 @@ interface IAssignRoles {
   role: string;
 }
 
+interface IForgotPassword {
+  email: string;
+}
+interface IResetPassword {
+  password: string;
+}
+
 export {
   IUser,
   ILoginReq,
@@ -46,4 +53,6 @@ export {
   IUpdateUser,
   ICreateEntity,
   IAssignRoles,
+  IForgotPassword,
+  IResetPassword,
 };

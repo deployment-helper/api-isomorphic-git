@@ -33,6 +33,14 @@ const reqCreateEntitySchema: ObjectSchema = Joi.object({
 const reqAssignRules: ObjectSchema = Joi.object({
   role: Joi.string().valid("reader", "writer", "maintainer", "owner"),
 });
+
+const reqForgotPassword: ObjectSchema = Joi.object({
+  email: Joi.string().email().required(),
+});
+
+const reqResetPassword: ObjectSchema = Joi.object({
+  password: Joi.string().min(6).max(16).required(),
+});
 export {
   reqAddUserSchema,
   regLoginSchema,
@@ -41,4 +49,6 @@ export {
   reqCreateEntitySchema,
   reqAssignRules,
   reqGetUserSchema,
+  reqForgotPassword,
+  reqResetPassword,
 };

@@ -6,6 +6,8 @@ User Management Backend service
 
 ## Local Development
 
+<!-- TODO Architecure daigram required -->
+
 - Run Mongodb db
 
 Application using docker based mongodb instance. Mongodb command to run.
@@ -24,4 +26,4 @@ Export `GOOGLE_APPLICATION_CREDENTIALS` environment variable
 
 `export GOOGLE_APPLICATION_CREDENTIALS='<service-account-key-file>'`
 
-Export `DATABASE_NAME` environment variable in monst of the case GCP project name
+Export `DATABASE_NAME` environment variable in monst of the casees it is similar to GCP project name.

@@ -2,6 +2,7 @@ import { Eval } from "./eval";
 import { DefaultRoles } from "../constants";
 import { ErrorBadReq } from "../errors";
 import { EntityHelper } from "../helpers/entity.helper";
+import { Email } from "./email";
 
 function createPermissionsBYRole(
   role: string,
@@ -55,4 +56,5 @@ export {
   createPermissionsBYRole,
   createNewPermissions,
   removePermissions,
+  Email,
 };
