@@ -8,6 +8,10 @@ export class Config {
   public static JWT_EXPIRE_TIME: string = process.env.JWT_EXPIRE_TIME
     ? process.env.JWT_EXPIRE_TIME
     : "1h";
+  public static FORGOT_PASSWORD_JWT_EXPIRE_TIME: string = process.env
+    .FORGOT_PASSWORD_JWT_EXPIRE_TIME
+    ? process.env.FORGOT_PASSWORD_JWT_EXPIRE_TIME
+    : "1h";
   public static CORS_WHITE_LIST: Array<string> = process.env.CORS_WHITE_LIST
     ? process.env.CORS_WHITE_LIST.split(",")
     : ["http://localhost:8000"];

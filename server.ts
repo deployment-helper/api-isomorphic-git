@@ -33,6 +33,7 @@ app.use(
     path: [
       { url: "/api/v1/user", methods: ["POST"], method: "POST" },
       "/api/v1/auth/login",
+      "/api/v1/auth/forgot-password",
       "/api/v1/health",
     ],
   })
