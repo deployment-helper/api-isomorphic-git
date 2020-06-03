@@ -17,6 +17,7 @@ import { ErrorUnAuthorizedAccess } from "../../../errors";
 import { JWT } from "../../../jwt";
 import { Config } from "../../../config";
 import { BCRYPT } from "../../../constants";
+import { Email } from "../../../util";
 export class AuthController extends BaseController {
   constructor() {
     super();
@@ -72,7 +73,8 @@ export class AuthController extends BaseController {
             Config.FORGOT_PASSWORD_JWT_EXPIRE_TIME
           );
           // TODO: email need to send.
-          console.log(jwt_token);
+          const resetPasswordLink = `${Config.RESET_PASSWORD_ENDPOINT}?token=${jwt_token}`;
+          Email.sendForgotPasswordEmail(user.email, resetPasswordLink);
           resp
             .status(200)
             .send({ message: "An Email sent to the registerd email address." });

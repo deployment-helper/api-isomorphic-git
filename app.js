@@ -12,4 +12,10 @@ env_variables:
     DB_DOMAIN: ${process.env.DB_DOMAIN}
     DEBUG: ${process.env.DEBUG}
     CORS_WHITE_LIST: ${process.env.CORS_WHITE_LIST}
+    FORGOT_PASSWORD_JWT_EXPIRE_TIME: ${
+      process.env.FORGOT_PASSWORD_JWT_EXPIRE_TIME
+    }
+    SEND_GRID_API_KEY: ${process.env.SEND_GRID_API_KEY}
+    SEND_GRID_FROM_EMAIL: ${process.env.SEND_GRID_FROM_EMAIL}
+    RESET_PASSWORD_ENDPOINT: ${process.env.RESET_PASSWORD_ENDPOINT}
 `);
