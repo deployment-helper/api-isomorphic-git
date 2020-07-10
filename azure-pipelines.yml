@@ -48,7 +48,7 @@ stages:
         displayName: "DeployTODev"
         condition: "and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))"
         variables:
-          - group: "DevEnv"
+          - group: "api_aws_step_function_dev"
         steps:
           - task: DownloadBuildArtifacts@0
             inputs:
@@ -88,7 +88,7 @@ stages:
         displayName: "DeployToProd"
         condition: "and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))"
         variables:
-          - group: "ProdEnv"
+          - group: "api_aws_step_function_prod"
         steps:
           - task: DownloadBuildArtifacts@0
             inputs:
