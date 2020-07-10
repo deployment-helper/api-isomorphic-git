@@ -59,9 +59,9 @@ export class AuthController extends BaseController {
       });
   }
   async forgotPassword(req: Request, resp: Response, next: NextFunction) {
-    const body: IForgotPassword = req.body;
-    this.validateReqSchema(reqForgotPassword, body);
     try {
+      const body: IForgotPassword = req.body;
+      this.validateReqSchema(reqForgotPassword, body);
       const user = await UserModel.findOne({ email: body.email });
       if (user === null) {
         next(new ErrorUnAuthorizedAccess("User does not exist."));
@@ -87,9 +87,9 @@ export class AuthController extends BaseController {
     }
   }
   async resetPassword(req: JwtRequest, resp: Response, next: NextFunction) {
-    const body: IResetPassword = req.body;
-    this.validateReqSchema(reqResetPassword, body);
     try {
+      const body: IResetPassword = req.body;
+      this.validateReqSchema(reqResetPassword, body);
       const user = await UserModel.findOne({
         email: req.user ? req.user.email : "",
       });
@@ -99,9 +99,7 @@ export class AuthController extends BaseController {
         try {
           user.password = bcrypt.hashSync(body.password, BCRYPT.SALT_ROUNDS);
           await user.save();
-          resp
-            .status(200)
-            .send({ message: "An Email sent to the registerd email address." });
+          resp.status(200).send({ message: "Password reset successfully." });
         } catch (error) {
           next(error);
         }
