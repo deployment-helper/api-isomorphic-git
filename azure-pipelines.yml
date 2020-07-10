@@ -70,7 +70,7 @@ stages:
             displayName: "Download GCP Key"
             name: "AuthKey"
             inputs:
-              secureFile: "dev-quiz-platform-1309c15db500.json"
+              secureFile: "api-aws-step-function-dev-bdb39695a190.json"
               retryCount: "2"
           - script: |
               wget https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.tar.gz
@@ -108,7 +108,7 @@ stages:
             displayName: "Download GCP Key"
             name: "AuthKey"
             inputs:
-              secureFile: "prod-quiz-platform-7445bd9834fb.json"
+              secureFile: "api-aws-step-function-dev-bdb39695a190.json"
               retryCount: "2"
           - script: |
               wget https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.tar.gz
