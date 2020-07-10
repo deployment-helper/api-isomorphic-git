@@ -8,6 +8,8 @@ User Management Backend service
 
 <!-- TODO Architecure daigram required -->
 
+
+
 - Run Mongodb db
 
 Application using docker based mongodb instance. Mongodb command to run.
