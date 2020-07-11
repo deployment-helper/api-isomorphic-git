@@ -3,9 +3,6 @@ describe("Config Tests", () => {
   it("Mdule should loaded", () => {
     expect(Config).toBeTruthy();
   });
-  it("Should have DB_CONNECTION_STRING", () => {
-    expect(Config.DB_CONNECTION_STRING).toBeTruthy();
-  });
   it("Should have JWT_SECRET", () => {
     expect(Config.JWT_SECRET).toBeTruthy();
   });
