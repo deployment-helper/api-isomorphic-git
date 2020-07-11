@@ -110,7 +110,7 @@ stages:
             displayName: "Download GCP Key"
             name: "AuthKey"
             inputs:
-              secureFile: "api-aws-step-function-dev-bdb39695a190.json"
+              secureFile: "api-aws-step-function-prod-680c23326ad8.json"
               retryCount: "2"
           - script: env
             displayName: "Logs"
