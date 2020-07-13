@@ -1,4 +1,4 @@
-name: "User Management"
+name: "api-aws-step-function"
 trigger:
   - master
   - develop
@@ -17,6 +17,8 @@ stages:
               versionSpec: "v12.16.1"
           - script: npm install
             displayName: "Installing Dependencies"
+          - script: env
+            displayName: "Logs"
           - script: npm run test:cov
             displayName: "Unit Test"
           - task: PublishTestResults@2
@@ -48,7 +50,7 @@ stages:
         displayName: "DeployTODev"
         condition: "and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))"
         variables:
-          - group: "DevEnv"
+          - group: "api_aws_step_function_dev"
         steps:
           - task: DownloadBuildArtifacts@0
             inputs:
@@ -70,7 +72,7 @@ stages:
             displayName: "Download GCP Key"
             name: "AuthKey"
             inputs:
-              secureFile: "dev-quiz-platform-1309c15db500.json"
+              secureFile: "api-aws-step-function-dev-bdb39695a190.json"
               retryCount: "2"
           - script: |
               wget https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.tar.gz
@@ -88,7 +90,7 @@ stages:
         displayName: "DeployToProd"
         condition: "and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))"
         variables:
-          - group: "ProdEnv"
+          - group: "api_aws_step_function_prod"
         steps:
           - task: DownloadBuildArtifacts@0
             inputs:
@@ -108,8 +110,10 @@ stages:
             displayName: "Download GCP Key"
             name: "AuthKey"
             inputs:
-              secureFile: "prod-quiz-platform-7445bd9834fb.json"
+              secureFile: "api-aws-step-function-prod-680c23326ad8.json"
               retryCount: "2"
+          - script: env
+            displayName: "Logs"
           - script: |
               wget https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.tar.gz
               tar zxvf google-cloud-sdk.tar.gz && ./google-cloud-sdk/install.sh --quiet --usage-reporting=false --path-update=true
