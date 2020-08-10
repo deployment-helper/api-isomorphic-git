@@ -1,85 +1,40 @@
+# API Isomorphic Git
 
-# gcp-nodejs-appengine
+### TODO: pipeline status
 
+API to perfrom git operations on multiple git service providers
 
-[![Build Status](https://dev.azure.com/vinaymavi/Quiz%20Platfrom/_apis/build/status/user-management?branchName=develop)](https://dev.azure.com/vinaymavi/Quiz%20Platfrom/_build/latest?definitionId=1&branchName=develop)
-
-User Management Backend service
+- Github
+- Gitlab
+- Bitbucker
+- Azure Repos
 
 ## Local Development
 
 <!-- TODO Architecure daigram required -->
 
-
-
-- Run Mongodb db
-
-Application using docker based mongodb instance. Mongodb command to run.
-
-`docker-compose up`
-
-Mongodb configuration can be find in file `src/config/index.ts`
-
-- Run Development Server
-
-`npm run dev`
-
 ### Environment variables
 
-**GOOGLE_APPLICATION_CREDENTIALS**
-
-This environment variable is used for sign-in to GCP account
-
-Export `GOOGLE_APPLICATION_CREDENTIALS` environment variable
-
-`export GOOGLE_APPLICATION_CREDENTIALS='<service-account-key-file>'`
-
-**DB_USER_NAME**
-
-This is environment variable is used to provide `database user`
-
-**DB_PASWORD**
-
-This environment variable is used to provide `database password`
-
-**DB_DOMAIN**
-
-This environment variable is used to provide `database server`
-
-**DATABASE_NAME**
-
-This environment variable is used to provided `database name`
-
-Export `DATABASE_NAME` environment variable in monst of the casees it is similar to GCP project name.
-
 **DEBUG**
-
 This is a boolen flag used to enable and disable `express.js` debugging.
 
 **CORS_WHITE_LIST**
 
 This environment variable is used for white listing the URLs for `CROS` requests.
 
-**JWT_EXPIRE_TIME**
-
-This environment variable is used to configure jwt token expire time.
-
 **JWT_SECRET**
 
 This environment variable is used to configure JWT secret.
 
-**FORGOT_PASSWORD_JWT_EXPIRE_TIME**
+**MYJUNIOUR_TASK_SUCCESS_URL**
 
-This environment variable is used for setting expire time for forgot password token.
+URL to send success response of the task
 
-**SEND_GRID_API_KEY**
+**MYJUNIOUR_TASK_ERROR_URL**
 
-This environment variable is used for send grid service authentication.
+URL to send error response of the task
 
-**SEND_GRID_FROM_EMAIL**
+### Documentation
 
-This environment variable is used for setting `from email address` for sending emails.
-
-**RESET_PASSWORD_ENDPOINT**
-
-This environment variable is used to configure webapp reset password endpoint.
+- https://dev.azure.com/vinaymavi/MCRC/_wiki/wikis/MCRC.wiki/25/APIs
+- https://documenter.getpostman.com/view/3537864/T1DtfGGQ?version=latest#45f3b74c-e4e8-4285-afdf-04cb68b00b46
