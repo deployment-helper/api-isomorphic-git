@@ -2,7 +2,7 @@
   "name": "api-isomorphic-git",
   "version": "1.0.0",
   "description": "API implementation to perform git operations",
-  "main": "server.ts",
+  "main": "server.js",
   "scripts": {
     "test": "jest --verbose -i",
     "test:cov": "jest --coverage --verbose",
