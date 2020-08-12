@@ -1,9 +1,9 @@
-import { regLoginSchema, reqAddUserSchema } from "./index";
+import { getVersionSchema, crateVersionSchema } from "./index";
 describe("Validation Tests", () => {
   test("regLoginSchema should loaded", () => {
-    expect(regLoginSchema).toBeTruthy();
+    expect(getVersionSchema).toBeTruthy();
   });
   test("reqAddUserSchema should loaded", () => {
-    expect(reqAddUserSchema).toBeTruthy();
+    expect(crateVersionSchema).toBeTruthy();
   });
 });
