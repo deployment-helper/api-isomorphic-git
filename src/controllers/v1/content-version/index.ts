@@ -1,12 +1,12 @@
 import { BaseController } from "../../base.controller";
-import { JwtRequest } from "@myjunior/commons";
+import { JwtRequest, ErrorBadReq } from "@myjunior/commons";
 import { Response, NextFunction } from "express";
 import {
   hasPermission,
   PermissionTemplates,
   Permissions,
-  ErrorUnAuthorizedAccess,
 } from "@myjunior/commons";
+import { crateVersionSchema, getVersionSchema } from "../../../req-schemas";
 import { v4 as uuidv4 } from "uuid";
 import { Github } from "../../../isomorphic-git";
 import { DEFAULT_VERSION_FILE_NAME } from "../../../constants";
@@ -20,13 +20,17 @@ export class ContentVersionController extends BaseController {
     );
     this.logger.info("Checking permissions");
     if (hasPermission(req?.user?.permissions, requiredPermission)) {
-      this.logger.info("Permission check passed");
-      const dir = `${req.params.projectId}_${uuidv4()}`;
-      const username: string = req.query.username?.toString() || "";
-      const accesstoken: string = req.query.accesstoken?.toString() || "";
-      const repoUrl: string = req.query.repourl?.toString() || "";
-      const ismGit = new Github(username, accesstoken, dir);
+      let ismGit;
       try {
+        const reqData = Object.assign({}, req.params, req.query, req.body);
+        this.validateReqSchema(getVersionSchema, reqData);
+        this.logger.info("Permission check passed");
+        const dir = `${req.params.projectId}_${uuidv4()}`;
+        const username: string = req.query.username?.toString() || "";
+        const accesstoken: string = req.query.accesstoken?.toString() || "";
+        const repoUrl: string = req.query.repourl?.toString() || "";
+        ismGit = new Github(username, accesstoken, dir);
+
         await ismGit.clone(repoUrl);
         const content = await ismGit.readFile(
           `${req.params.projectId}/${req.params.version}/${DEFAULT_VERSION_FILE_NAME}`
@@ -40,8 +44,13 @@ export class ContentVersionController extends BaseController {
         }
       } catch (error) {
         this.logger.info("Cleaning....");
-        await ismGit.removeFolder();
-        resp.status(500).send(error);
+        ismGit ? await ismGit.removeFolder() : "";
+        // TODO: use global error handling.
+        if (error.name === "BadRequest") {
+          resp.status(400).send(error);
+        } else {
+          resp.status(500).send(error);
+        }
       }
     } else {
       resp.status(401).send("User not authorized");
@@ -57,15 +66,18 @@ export class ContentVersionController extends BaseController {
     );
     this.logger.info("Checking permissions");
     if (hasPermission(req?.user?.permissions, requiredPermission)) {
-      this.logger.info("Permission check passed");
-      const dir = `${req.params.projectId}_${uuidv4()}`;
-      const username: string = req.body.username?.toString() || "";
-      const accesstoken: string = req.body.accesstoken?.toString() || "";
-      const repoUrl: string = req.body.repourl?.toString() || "";
-      const version: number = req.body.version || 1;
-      const content: string = req.body.content || "";
-      const ismGit = new Github(username, accesstoken, dir);
+      let ismGit;
       try {
+        const reqData = Object.assign({}, req.params, req.query, req.body);
+        this.validateReqSchema(crateVersionSchema, reqData);
+        this.logger.info("Permission check passed");
+        const dir = `${req.params.projectId}_${uuidv4()}`;
+        const username: string = req.body.username?.toString() || "";
+        const accesstoken: string = req.body.accesstoken?.toString() || "";
+        const repoUrl: string = req.body.repourl?.toString() || "";
+        const version: number = req.body.version || 1;
+        const content: string = req.body.content || "";
+        ismGit = new Github(username, accesstoken, dir);
         await ismGit.clone(repoUrl);
         await ismGit.addFile(
           `${req.params.projectId}/${version}/${DEFAULT_VERSION_FILE_NAME}`,
@@ -87,8 +99,13 @@ export class ContentVersionController extends BaseController {
         this.logger.info("Something is wrong");
         this.logger.error(error);
         this.logger.info("Cleaning....");
-        await ismGit.removeFolder();
-        resp.status(500).send(error);
+        ismGit ? await ismGit.removeFolder() : "";
+        // TODO: use global error handling.
+        if (error.name === "BadRequest") {
+          resp.status(400).send(error);
+        } else {
+          resp.status(500).send(error);
+        }
       }
     } else {
       this.logger.warn("Permission check fails. Permission required.");

@@ -1,54 +1,20 @@
 import Joi, { ObjectSchema } from "@hapi/joi";
 
-const reqGetUserSchema: ObjectSchema = Joi.object({});
-const reqAddUserSchema: ObjectSchema = Joi.object({
-  firstName: Joi.string().alphanum().min(3).max(50),
-  lastName: Joi.string().alphanum().min(3).max(50),
-  email: Joi.string().email().required(),
-  password: Joi.string().min(6).max(16).required(),
+const crateVersionSchema: ObjectSchema = Joi.object({
+  username: Joi.string().max(50).required(),
+  accesstoken: Joi.string().min(10).max(250).required(),
+  repourl: Joi.string().min(5).max(250).required(),
+  projectId: Joi.string().min(5).max(250).required(),
+  version: Joi.string().min(1).max(5).required(),
+  content: Joi.string().min(10).max(5000).required(),
 });
 
-const reqUpdateUserSchema: ObjectSchema = Joi.object({
-  firstName: Joi.string().alphanum().min(3).max(50),
-  lastName: Joi.string().alphanum().min(3).max(50),
-  email: Joi.string().email(),
-  mobile: Joi.string().min(6).max(15),
+const getVersionSchema: ObjectSchema = Joi.object({
+  username: Joi.string().max(50).required(),
+  accesstoken: Joi.string().min(10).max(250).required(),
+  repourl: Joi.string().min(5).max(250).required(),
+  projectId: Joi.string().min(5).max(250).required(),
+  version: Joi.string().min(1).max(5).required(),
 });
 
-const regLoginSchema: ObjectSchema = Joi.object({
-  email: Joi.string().email().required(),
-  password: Joi.string().min(6).max(16).required(),
-});
-
-const reqChangePasswordSchema: ObjectSchema = Joi.object({
-  oldPassword: Joi.string().min(6).max(16).required(),
-  newPassword: Joi.string().min(6).max(16).required(),
-});
-
-const reqCreateEntitySchema: ObjectSchema = Joi.object({
-  entityId: Joi.string().min(6).required(),
-  extraPermission: Joi.array().items(Joi.string),
-});
-
-const reqAssignRules: ObjectSchema = Joi.object({
-  role: Joi.string().valid("reader", "writer", "maintainer", "owner"),
-});
-
-const reqForgotPassword: ObjectSchema = Joi.object({
-  email: Joi.string().email().required(),
-});
-
-const reqResetPassword: ObjectSchema = Joi.object({
-  password: Joi.string().min(6).max(16).required(),
-});
-export {
-  reqAddUserSchema,
-  regLoginSchema,
-  reqChangePasswordSchema,
-  reqUpdateUserSchema,
-  reqCreateEntitySchema,
-  reqAssignRules,
-  reqGetUserSchema,
-  reqForgotPassword,
-  reqResetPassword,
-};
+export { crateVersionSchema, getVersionSchema };
