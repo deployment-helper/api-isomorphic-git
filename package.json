@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "jest --verbose -i",
-    "test:cov": "jest --coverage --verbose",
+    "test:cov": "jest --coverage --verbose -i",
     "test:watch": "jest --watch --verbose",
     "dev": "nodemon",
     "build": "npm run clean && tsc",

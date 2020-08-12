@@ -44,6 +44,7 @@ export class ContentVersionController extends BaseController {
         }
       } catch (error) {
         this.logger.info("Cleaning....");
+        this.logger.warn(error);
         ismGit ? await ismGit.removeFolder() : "";
         // TODO: use global error handling.
         if (error.name === "BadRequest") {
