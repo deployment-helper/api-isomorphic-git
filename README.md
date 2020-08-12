@@ -1,6 +1,6 @@
 # API Isomorphic Git
 
-### TODO: pipeline status
+Develop Branch - [![Build Status](https://dev.azure.com/vinaymavi/MCRC/_apis/build/status/myjunior.api-isomorphic-git?branchName=develop)](https://dev.azure.com/vinaymavi/MCRC/_build/latest?definitionId=5&branchName=develop)
 
 API to perfrom git operations on multiple git service providers
 
@@ -33,6 +33,14 @@ URL to send success response of the task
 **MYJUNIOUR_TASK_ERROR_URL**
 
 URL to send error response of the task
+
+**GIT_AUTHOR_NAME**
+
+Git author for commit
+
+**GIT_AUTHOR_EMAIL**
+
+Git author email for commit
 
 ### Documentation
 
