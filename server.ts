@@ -4,7 +4,7 @@ import cors, { CorsOptions } from "cors";
 import { apiRouter } from "./src/api";
 import { customErrorHandler } from "./src/middleware";
 import { Config } from "./src/config";
-import logger from "./src/logger";
+import { logger } from "@myjunior/commons";
 /**
  * Mongodb connection
  */
@@ -30,7 +30,6 @@ app.use(
   jwt({ secret: Config.JWT_SECRET }).unless({
     path: [
       { url: "/api/v1/user", methods: ["POST"], method: "POST" },
-      "/api/v1/auth/login",
       "/api/v1/health",
     ],
   })

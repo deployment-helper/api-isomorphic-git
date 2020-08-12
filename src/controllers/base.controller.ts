@@ -1,7 +1,7 @@
-import { ErrorBadReq } from "../errors";
+import { ErrorBadReq } from "@myjunior/commons";
 import { ObjectSchema, ValidationResult } from "@hapi/joi";
 import { Request, Response, NextFunction } from "express";
-import logger from "../logger";
+import { logger } from "@myjunior/commons";
 import { Logger } from "winston";
 export class BaseController {
   protected logger: Logger;

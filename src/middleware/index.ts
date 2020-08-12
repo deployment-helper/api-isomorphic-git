@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
-import { ErrorBadReq, ErrorUnAuthorizedAccess } from "../errors";
-import logger from "../logger";
+import { ErrorBadReq, ErrorUnAuthorizedAccess } from "@myjunior/commons";
 function customErrorHandler(
   err: Error,
   req: Request,

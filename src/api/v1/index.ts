@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { authRouter } from "./auth";
+import { contentVersionRouter } from "./content-version";
 import { healthRouter } from "./health";
 const router = Router();
-router.use("/auth", authRouter);
+router.use("/", contentVersionRouter);
 router.use("/health", healthRouter);
 
 export { router as v1Router };

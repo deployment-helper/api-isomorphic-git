@@ -9,4 +9,8 @@ export class Config {
   public static CORS_WHITE_LIST: Array<string> = process.env.CORS_WHITE_LIST
     ? process.env.CORS_WHITE_LIST.split(",")
     : ["http://localhost:8000"];
+  public static GIT_AUTHOR_NAME: string =
+    process.env.GIT_AUTHOR_NAME || "localmachine";
+  public static GIT_AUTHOR_EMAIL: string =
+    process.env.GIT_AUTHOR_NAME || "localmachine@local";
 }
