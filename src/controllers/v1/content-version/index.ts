@@ -31,12 +31,16 @@ export class ContentVersionController extends BaseController {
         const content = await ismGit.readFile(
           `${req.params.projectId}/${req.params.version}/${DEFAULT_VERSION_FILE_NAME}`
         );
+        this.logger.info("Cleaning....");
+        await ismGit.removeFolder();
         if (content) {
           resp.status(200).send(content);
         } else {
           resp.status(404).send("File does not exist");
         }
       } catch (error) {
+        this.logger.info("Cleaning....");
+        await ismGit.removeFolder();
         resp.status(500).send(error);
       }
     } else {
@@ -71,6 +75,8 @@ export class ContentVersionController extends BaseController {
           `${req.params.projectId} version ${version} created.`
         );
         await ismGit.push();
+        this.logger.info("Cleaning....");
+        await ismGit.removeFolder();
         resp.status(200).send({
           status: "OK",
           message: "New version created successfully.",
@@ -80,6 +86,8 @@ export class ContentVersionController extends BaseController {
       } catch (error) {
         this.logger.info("Something is wrong");
         this.logger.error(error);
+        this.logger.info("Cleaning....");
+        await ismGit.removeFolder();
         resp.status(500).send(error);
       }
     } else {

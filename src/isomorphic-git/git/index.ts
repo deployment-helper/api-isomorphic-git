@@ -2,6 +2,7 @@ import IsmGit from "isomorphic-git";
 import http from "isomorphic-git/http/node";
 import path from "path";
 import fs from "fs-extra";
+import rimraf from "rimraf";
 import { logger } from "@myjunior/commons";
 import { Config } from "../../config";
 export class Git {
@@ -82,5 +83,9 @@ export class Git {
       logger.warn(`File ${filePath} does not exist.`);
       return undefined;
     }
+  }
+
+  async removeFolder() {
+    rimraf.sync(path.join(this.rootDir, this.dir));
   }
 }
